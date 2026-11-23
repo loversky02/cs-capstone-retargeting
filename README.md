@@ -14,6 +14,15 @@ python3 -m unittest discover -s tests -v
 
 Mỗi lần chạy in một bản ghi JSON. So `position_rmse_m`, `joint_limit_violation_frames` và `used_segments` giữa hai lần chạy. `position_rmse_m` là thành phần vị trí của sai số pose. Hướng TCP nằm ngoài mô hình 2R này. Hiệu chỉnh dùng oracle tổng hợp nên kết quả chỉ mô tả benchmark, chưa đo lợi ích với người dùng hay robot thật.
 
+## Demo tương tác
+
+```sh
+python3 examples/visualize.py --out demo.html
+```
+
+Mở `demo.html` bằng trình duyệt bất kỳ, không cần mạng. Kéo thanh ngân sách để xem RMSE thay đổi, bấm Chạy để xem tay 2R bám quỹ đạo. Đoạn vàng là đoạn oracle đã sửa, chấm đỏ là mục tiêu ngoài tầm với.
+
+- [Bậc thang từ 2R lên humanoid và dữ liệu học robot](docs/research/wiki/next-steps.md)
 - [Lộ trình đọc và code tham khảo](docs/research/wiki/index.md)
 - [Đầu vào và mức tái lập của từng hướng](docs/research/wiki/reproducibility.md)
 - [Nhật ký SIM và cách ghi lần thử mới](docs/research/wiki/sim.md)
