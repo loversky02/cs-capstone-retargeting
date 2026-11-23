@@ -27,6 +27,11 @@ def inverse(x, y):
 
 
 def run(budget):
+    return simulate(budget)["result"]
+
+
+def simulate(budget):
+    """Return the metrics record plus per-frame trajectories for visualisation."""
     if budget not in range(len(SEGMENTS) + 1):
         raise ValueError("budget must be between 0 and 3")
     reference = [forward(0.2 * math.sin(i / 5), 1.25) for i in range(30)]
@@ -42,14 +47,18 @@ def run(budget):
 
     violations = outside_count = 0
     squared_errors = []
+    frames = []
     for target, truth in zip(observed, reference):
         raw, outside = inverse(*target)
         outside_count += int(outside)
         violations += int(any(not low <= q <= high
                               for q, (low, high) in zip(raw, LIMITS)))
         bounded = [max(low, min(high, q)) for q, (low, high) in zip(raw, LIMITS)]
-        squared_errors.append(math.dist(forward(*bounded), truth) ** 2)
-    return {
+        achieved = forward(*bounded)
+        squared_errors.append(math.dist(achieved, truth) ** 2)
+        frames.append({"reference": truth, "target": target, "joints": bounded,
+                       "achieved": achieved, "outside": outside})
+    result = {
         "scenario": "synthetic-planar-2r-v1",
         "frames": len(reference),
         "budget_segments": budget,
@@ -59,6 +68,7 @@ def run(budget):
         "joint_limit_violation_frames": violations,
         "geometrically_unreachable_target_frames": outside_count,
     }
+    return {"result": result, "frames": frames}
 
 
 def journal():

@@ -1,6 +1,6 @@
 {
   "method": "SIM-inspired experiment record",
-  "benchmark_source_sha256": "d3c9a70635a502b246755cb9ae0aaba83428939cab2e03da01d9fd1ddeb1bd7b",
+  "benchmark_source_sha256": "e35be261b263c122ad2814fad5897f5455c0e51b424720df80cbe053e6633510",
   "baseline": {
     "scenario": "synthetic-planar-2r-v1",
     "frames": 30,

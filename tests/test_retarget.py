@@ -29,3 +29,18 @@ class RetargetTest(unittest.TestCase):
         for budget in (-1, 4):
             with self.subTest(budget=budget), self.assertRaises(ValueError):
                 run(budget)
+
+
+class VisualizeTest(unittest.TestCase):
+    def test_demo_embeds_every_budget_and_matches_cli_metrics(self):
+        import json
+        from examples.visualize import build_payload, render
+        payload = build_payload()
+        self.assertEqual([r["result"] for r in payload["runs"]], [run(b) for b in range(4)])
+        html = render(payload)
+        self.assertNotIn("__DATA__", html)
+        self.assertNotIn("http://", html.replace("http://www.w3.org/2000/svg", ""))
+        self.assertNotIn("https://", html)
+        start = html.index("const DATA = ") + len("const DATA = ")
+        self.assertEqual(json.loads(html[start:html.index(";\n", start)])["segments"],
+                         [list(s) for s in payload["segments"]])
