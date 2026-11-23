@@ -2,3 +2,6 @@ __pycache__/
 *.py[cod]
 .venv/
 demo.html
+.cache/
+.venv/
+outputs/
