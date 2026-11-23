@@ -1,0 +1,78 @@
+{
+  "method": "SIM-inspired experiment record",
+  "benchmark_source_sha256": "d3c9a70635a502b246755cb9ae0aaba83428939cab2e03da01d9fd1ddeb1bd7b",
+  "baseline": {
+    "scenario": "synthetic-planar-2r-v1",
+    "frames": 30,
+    "budget_segments": 0,
+    "used_segments": 0,
+    "corrected_frame_ranges_half_open": [],
+    "position_rmse_m": 0.089665728,
+    "joint_limit_violation_frames": 4,
+    "geometrically_unreachable_target_frames": 4
+  },
+  "change": "Replace corrupted target observations with synthetic ground truth, highest injected bias first.",
+  "rationale": "Estimate the effect of segment correction under a fixed offline budget.",
+  "prediction": "Oracle correction should reduce position RMSE as the budget increases.",
+  "observed": [
+    {
+      "scenario": "synthetic-planar-2r-v1",
+      "frames": 30,
+      "budget_segments": 1,
+      "used_segments": 1,
+      "corrected_frame_ranges_half_open": [
+        [
+          22,
+          26
+        ]
+      ],
+      "position_rmse_m": 0.070347628,
+      "joint_limit_violation_frames": 0,
+      "geometrically_unreachable_target_frames": 4
+    },
+    {
+      "scenario": "synthetic-planar-2r-v1",
+      "frames": 30,
+      "budget_segments": 2,
+      "used_segments": 2,
+      "corrected_frame_ranges_half_open": [
+        [
+          22,
+          26
+        ],
+        [
+          4,
+          8
+        ]
+      ],
+      "position_rmse_m": 0.036514837,
+      "joint_limit_violation_frames": 0,
+      "geometrically_unreachable_target_frames": 0
+    },
+    {
+      "scenario": "synthetic-planar-2r-v1",
+      "frames": 30,
+      "budget_segments": 3,
+      "used_segments": 3,
+      "corrected_frame_ranges_half_open": [
+        [
+          22,
+          26
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          13,
+          17
+        ]
+      ],
+      "position_rmse_m": 0.0,
+      "joint_limit_violation_frames": 0,
+      "geometrically_unreachable_target_frames": 0
+    }
+  ],
+  "decision": "Keep as a teaching reference for this synthetic case.",
+  "limitations": "No orientation, collision, human corrections, video, or physical trials."
+}
